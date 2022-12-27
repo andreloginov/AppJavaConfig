@@ -11,4 +11,8 @@ public interface EmployeeDao {
 
 
     List<Employee> findAllEmployees();
+
+    void deleteEmployee(int id);
+
+    Employee getEmpFromId(int id);
 }

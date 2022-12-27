@@ -21,7 +21,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
     public EmployeeServiceImpl(EmployeeDao employeeDao) {
-        super();
         this.employeeDao = employeeDao;
     }
 
@@ -34,6 +33,16 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public void saveEmployee(Employee employee) {
         employeeDao.save(employee);
+    }
+
+    @Override
+    public Employee getEmpFromId(int id) {
+        return employeeDao.getEmpFromId(id);
+    }
+
+    @Override
+    public void deleteEmployee(int id) {
+        employeeDao.deleteEmployee(id);
     }
 }
 

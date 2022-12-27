@@ -14,7 +14,7 @@ import java.util.List;
 
 
 @Repository()
-@Transactional(readOnly = true)
+@Transactional
 public class EmployeeDaoImpl implements EmployeeDao {
 
     public EmployeeDaoImpl() {
@@ -28,16 +28,30 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
 
+    @Override
     @Transactional
     public List<Employee> findAllEmployees() {
-        List<Employee> employee = entityManager
-                .createQuery("FROM Employee")
-                .getResultList();
-        return employee;
+        return entityManager.createQuery("FROM Employee").getResultList();
     }
 
-    public void save(Employee user) {
+    @Override
+    @Transactional
+    public void deleteEmployee(int id) {
+        entityManager.createQuery("delete Employee d where d.id =:var")
+                .setParameter("var", id)
+                .executeUpdate();
+    }
 
+    @Override
+    @Transactional
+    public Employee getEmpFromId(int id) {
+        return entityManager.find(Employee.class, id);
+    }
+
+    @Override
+    @Transactional
+    public void save(Employee employee) {
+        entityManager.merge(employee);
     }
 
 
