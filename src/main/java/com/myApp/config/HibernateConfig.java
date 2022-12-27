@@ -18,6 +18,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+
 @Configuration
 @EnableTransactionManagement
 @PropertySource(value = {
@@ -25,8 +26,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 })
 public class HibernateConfig {
 
-    private Environment environment;
-    @Autowired
+    private final Environment environment;
+
     public HibernateConfig(Environment environment) {
         this.environment = environment;
     }
@@ -74,7 +75,6 @@ public class HibernateConfig {
         dataSource.setUrl(environment.getRequiredProperty("jdbc.url"));
         dataSource.setUsername(environment.getRequiredProperty("jdbc.username"));
         dataSource.setPassword(environment.getRequiredProperty("jdbc.password"));
-        System.out.println("Соедение пройдено");
         return dataSource;
     }
 
